@@ -1,53 +1,30 @@
-<script>
-	import Header from './Header.svelte';
-	import './styles.css';
+<script lang="ts">
+  import './styles.css'
+  import Table from './Table.svelte'
+
+  const TABLE_CAPTION = `原神抗性表 v${__APP_VERSION__}`
 </script>
 
-<div class="app">
-	<Header />
+<svelte:head>
+  <title>{TABLE_CAPTION}</title>
+</svelte:head>
 
-	<main>
-		<slot />
-	</main>
+<aside>
+  <!--  -->
+</aside>
 
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
-</div>
+<main>
+  <Table caption={TABLE_CAPTION} />
+  <footer>
+    <!-- <p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p> -->
+  </footer>
+</main>
 
 <style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
+  main {
+    width: max-content;
+    position: relative;
+    margin: 0 auto;
+    background-color: transparent;
+  }
 </style>

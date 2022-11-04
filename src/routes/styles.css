@@ -1,95 +1,33 @@
-@import '@fontsource/fira-mono';
+@import 'font.css';
 
 :root {
-	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	--font-mono: 'Fira Mono', monospace;
-	--color-bg-0: rgb(202, 216, 228);
-	--color-bg-1: hsl(209, 36%, 86%);
-	--color-bg-2: hsl(224, 44%, 95%);
-	--color-theme-1: #ff3e00;
-	--color-theme-2: #40b3ff;
-	--color-text: rgba(0, 0, 0, 0.7);
-	--column-width: 42rem;
-	--column-margin-top: 4rem;
-	font-family: var(--font-body);
-	color: var(--color-text);
+	/* Color */
+	--red-accent2: #ff5252;
+	--blue-lighten2: #64b5f6;
+	--color-dark: #25294a;
+	--color-dark2: #2d325a;
+	--color-light: #ffffff;
+	/* Font Family */
+	--font-serif: 'Poppins', 'Noto Serif SC', serif;
+	--font-sans: 'Poppins', 'Noto Sans SC', sans-serif;
+	/* Border */
+	--border-width: 1px;
+	--border-width-outer: 8px;
+	--border-width-inner: 4px;
+	/* Z-Index */
+	--zindex: 999;
+	--zindex-dropdown: 1000;
+	--zindex-sticky: 1020;
+	--zindex-fixed: 1030;
+	--zindex-modal-backdrop: 1040;
+	--zindex-modal: 1050;
+	--zindex-popover: 1060;
+	--zindex-tooltip: 1070;
 }
 
 body {
-	min-height: 100vh;
-	margin: 0;
-	background-attachment: fixed;
-	background-color: var(--color-bg-1);
-	background-size: 100vw 100vh;
-	background-image: radial-gradient(
-			50% 50% at 50% 50%,
-			rgba(255, 255, 255, 0.75) 0%,
-			rgba(255, 255, 255, 0) 100%
-		),
-		linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);
-}
-
-h1,
-h2,
-p {
-	font-weight: 400;
-}
-
-p {
-	line-height: 1.5;
-}
-
-a {
-	color: var(--color-theme-1);
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-h1 {
-	font-size: 2rem;
-	text-align: center;
-}
-
-h2 {
-	font-size: 1rem;
-}
-
-pre {
-	font-size: 16px;
-	font-family: var(--font-mono);
-	background-color: rgba(255, 255, 255, 0.45);
-	border-radius: 3px;
-	box-shadow: 2px 2px 6px rgb(255 255 255 / 25%);
-	padding: 0.5em;
-	overflow-x: auto;
-	color: var(--color-text);
-}
-
-.text-column {
-	display: flex;
-	max-width: 48rem;
-	flex: 0.6;
-	flex-direction: column;
-	justify-content: center;
-	margin: 0 auto;
-}
-
-input,
-button {
-	font-size: inherit;
-	font-family: inherit;
-}
-
-button:focus:not(:focus-visible) {
-	outline: none;
-}
-
-@media (min-width: 720px) {
-	h1 {
-		font-size: 2.4rem;
-	}
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  font-size: 16px;
+  margin: 0;
 }
