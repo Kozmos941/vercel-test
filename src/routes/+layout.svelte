@@ -1,30 +1,33 @@
 <script lang="ts">
-  import './styles.css'
-  import Table from './Table.svelte'
-
-  const TABLE_CAPTION = `原神抗性表 v${__APP_VERSION__}`
+  import {
+    title,
+    scrollY,
+    innerWidth,
+    innerHeight,
+    imageForage,
+  } from '$lib/store'
+  import { onMount } from 'svelte'
+  // export const isMobile =F
+  // navigator.userAgentData?.mobile ?? !!navigator.userAgent.match(/Mobile/i)
+  onMount(() => {
+    if (localStorage.getItem('LastUpdate') !== __LAST_UPDATE__) {
+      localStorage.clear()
+      sessionStorage.clear()
+      imageForage.clear()
+      localStorage.setItem('LastUpdate', __LAST_UPDATE__)
+    }
+  })
 </script>
 
+<!-- https://svelte.dev/tutorial/svelte-window-bindings -->
+<svelte:window
+  bind:scrollY={$scrollY}
+  bind:innerWidth={$innerWidth}
+  bind:innerHeight={$innerHeight}
+/>
+
 <svelte:head>
-  <title>{TABLE_CAPTION}</title>
+  <title>{$title}</title>
 </svelte:head>
 
-<aside>
-  <!--  -->
-</aside>
-
-<main>
-  <Table caption={TABLE_CAPTION} />
-  <footer>
-    <!-- <p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p> -->
-  </footer>
-</main>
-
-<style>
-  main {
-    width: max-content;
-    position: relative;
-    margin: 0 auto;
-    background-color: transparent;
-  }
-</style>
+<slot />

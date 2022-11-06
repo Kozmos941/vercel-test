@@ -1,20 +1,23 @@
 <script lang="ts">
-  import { data, rowspan } from '../lib/table.json'
-  import type { TDValue } from '../lib/types'
-  import { TABLE_HEADS, SIGN_REPLACE } from '../lib/config'
+  import type { TDValue } from '$lib/types'
+  import { data, rowspan } from '$lib/table.json'
+  import { RACES, TABLE_HEADS, SIGN_REPLACE } from '$lib/config'
+  import { title, tCellRace } from '$lib/store'
 
-  // Props
-  export let caption: string
+  /* Table */
+  export let table: HTMLTableElement
+  const VAR_COLORS = TABLE_HEADS.filter(({ color }) => color).map(
+    ({ key, color }) => `--color-${key}: ${color};`
+  )
 
-  const VAR_COLORS = TABLE_HEADS.filter(({ color }) => color)
-    .map(({ key, color }) => `--color-${key}: ${color};`)
-    .join('')
+  /* THead */
+  export let offsetHeight: number
 
+  /* TBody */
+  export let tBody: HTMLTableSectionElement | null = null
   const DATA = data.map(item => new Map(Object.entries(item)))
   const ROW_SPAN = new Map(Object.entries(rowspan))
   const { INFINITY, ASTERISK, LINEFEED } = SIGN_REPLACE
-
-  /* Methods */
   const set_span = (k: string) => (ROW_SPAN.has(k) ? ROW_SPAN.get(k) : null)
   const add_class = (v: TDValue) => {
     const c = []
@@ -46,12 +49,21 @@
     }
     return t
   }
+
+  /* https://stackoverflow.com/a/58362767/15369811 */
+  function TCellRace(node: HTMLTableCellElement) {
+    if (node.classList.contains('race')) {
+      const [{ key }] = RACES.filter(({ value }) => value === node.innerText)
+      node.dataset.key = key
+      tCellRace.set(key, node)
+    }
+  }
 </script>
 
-<table style={VAR_COLORS}>
-  <caption>{caption}</caption>
+<table bind:this={table}>
+  <caption>{$title}</caption>
 
-  <thead>
+  <thead bind:offsetHeight>
     <tr>
       {#each TABLE_HEADS as th}
         <th class={th.key}>{th.value}</th>
@@ -59,13 +71,14 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody bind:this={tBody}>
     {#each DATA as ROW}
       <tr>
         {#each [...ROW] as [key, value]}
           <td
             class="{key} {add_class(value)}"
             rowspan={set_span(value)}
+            use:TCellRace
           >
             {@html check_data(value)}
           </td>
